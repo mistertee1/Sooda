@@ -15,7 +15,8 @@
     "test:failure": "tsx src/tests/audit_failure.test.ts",
     "test:auth": "tsx src/tests/authentication.test.ts",
     "test:stores": "tsx src/tests/store_management.test.ts",
-    "test": "npm run test:phase0 && npm run test:security && npm run test:remediation && npm run test:audit && npm run test:audit:startup && npm run test:failure && npm run test:auth && npm run test:stores",
+    "test:phase2:authz": "tsx src/tests/phase2_authorization_regression.test.ts",
+    "test": "npm run test:phase0 && npm run test:security && npm run test:remediation && npm run test:audit && npm run test:audit:startup && npm run test:failure && npm run test:auth && npm run test:stores && npm run test:phase2:authz",
     "clean": "rm -rf dist server.js data/*.db *.db *.sqlite *.sqlite3 sooda.db release.zip",
     "package": "python3 scripts/package-release.py",
     "verify:clean": "python3 -c \"import glob, os, sys; dbs = [f for p in ['**/*.db', '**/*.sqlite', '**/*.sqlite3'] for f in glob.glob(p, recursive=True) if not f.startswith('node_modules')]; (print('VERIFIED: Zero runtime database files found.') or sys.exit(0)) if not dbs else (print('FAILED: Found DB files:', dbs) or sys.exit(1))\"",
@@ -44,7 +45,6 @@
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.3"
+    "typescript": "~5.8.2"
   }
 }
