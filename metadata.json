@@ -1,0 +1,6 @@
+{
+  "name": "Sooda SaaS E-Commerce Platform",
+  "description": "Production-grade, Sudan-focused, multi-tenant SaaS e-commerce platform for merchants in Sudan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
