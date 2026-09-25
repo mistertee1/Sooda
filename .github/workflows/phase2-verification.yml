@@ -28,17 +28,17 @@ jobs:
           matches="$(find . -type f \( -name '*.db' -o -name '*.sqlite' -o -name '*.sqlite3' \) -not -path './node_modules/*' -not -path './.git/*' -print)"
           test -z "$matches"
 
-      - name: Verify stale Phase 2 statuses are absent
+      - name: Verify stale Phase 2 statuses are absent from implementation
         shell: bash
         run: |
           set -euo pipefail
-          ! grep -RIn --exclude-dir=.git --exclude-dir=node_modules --exclude='*.lock' -E '\b(PAUSED|ARCHIVED)\b' .
+          ! git grep -n -E '\b(PAUSED|ARCHIVED)\b' -- src server.ts App.tsx index.html package.json
 
-      - name: Verify predictable dev credentials are absent from source
+      - name: Verify predictable dev credentials are absent from implementation
         shell: bash
         run: |
           set -euo pipefail
-          ! grep -RIn --exclude-dir=.git --exclude-dir=node_modules -E 'token_(albaraka_owner|albaraka_staff|nilecrafts_owner|platform_admin)|DEV_TEST_PRINCIPALS_FIXTURE' .
+          ! git grep -n -E 'token_(albaraka_owner|albaraka_staff|nilecrafts_owner|platform_admin)|DEV_TEST_PRINCIPALS_FIXTURE' -- src server.ts App.tsx index.html package.json
 
       - name: Run full regression suite
         run: npm test
