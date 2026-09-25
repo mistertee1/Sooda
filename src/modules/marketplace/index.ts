@@ -1,12 +1,17 @@
 /**
- * Marketplace Module (Architectural Boundary - Phase 11)
- * Sudan Platform Marketplace: Aggregation, Discovery, and Search Index Layer.
- * 
- * CORE STRUCTURAL RULES:
- * 1. Platform -> Marketplace -> Merchant Stores.
- * 2. Product ownership is STRICTLY: Merchant -> Store -> Product.
- * 3. The Marketplace is an index and discovery view across independent stores.
- *    It is NEVER a giant monolithic tenant that usurps store or product ownership.
+ * Marketplace Architectural Placeholder — Phase 2
+ *
+ * This module defines only the future boundary for marketplace discovery.
+ * It is NOT a functional marketplace and must not be mounted by Phase 2
+ * routes, UI, search, catalog, checkout, or tenant authorization flows.
+ *
+ * Ownership invariant for future phases:
+ *   Store -> Product
+ *   Marketplace -> indexes/discovers eligible Store/Product records
+ *
+ * The Marketplace is never a merchant tenant and never owns merchant
+ * products. Any future implementation must consume tenant-authorized data
+ * through explicit platform services without bypassing store isolation.
  */
 
 export interface MarketplaceIndexedProduct {
@@ -21,6 +26,9 @@ export interface MarketplaceIndexedProduct {
   city: string;
 }
 
+/**
+ * Future-phase contract only. No implementation is provided in Phase 2.
+ */
 export interface IMarketplaceModuleService {
   searchMarketplace(query: string, filters?: { city?: string; minPrice?: number; maxPrice?: number }): Promise<MarketplaceIndexedProduct[]>;
   listFeaturedStores(): Promise<Array<{ storeId: string; slug: string; nameAr: string }>>;
